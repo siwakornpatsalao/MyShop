@@ -7,17 +7,18 @@
 
     <TextView
         android:id="@+id/l"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:textStyle="bold|italic"
-        android:textSize="20sp"
+        android:layout_width="205dp"
+        android:layout_height="56dp"
         android:text="เข้าสู่ระบบ"
+        android:textColor="#000000"
+        android:textSize="40sp"
+        android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.088"
+        app:layout_constraintHorizontal_bias="0.035"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.265" />
+        app:layout_constraintVertical_bias="0.231" />
 
     <EditText
         android:id="@+id/userNameLogin"

@@ -19,7 +19,8 @@
         android:layout_height="38dp"
         android:layout_gravity="center"
         android:text="ProductName"
-        android:textSize="24sp"
+        android:textColor="#0B0A0A"
+        android:textSize="30sp"
         android:textStyle="bold|italic" />
 
     <TextView
@@ -29,7 +30,8 @@
         android:layout_gravity="center"
 
         android:text="Price"
-        android:textSize="24sp"
+        android:textColor="#232020"
+        android:textSize="30sp"
         android:textStyle="bold|italic" />
 
     <TextView
@@ -38,7 +40,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Amount"
-        android:textSize="24sp"
+        android:textColor="@color/black"
+        android:textSize="30sp"
         android:textStyle="bold|italic" />
 
 </LinearLayout>

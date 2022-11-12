@@ -102,7 +102,7 @@ public class DetailActivity extends AppCompatActivity {
                     alert.setVisibility(View.VISIBLE);
                     amount.getText().clear();
                 }else{
-                    a.store(new BigInteger("400")).flowable().subscribeOn(Schedulers.io()).subscribe(new Consumer<TransactionReceipt>() {
+                    a.store(new BigInteger(amount.getText().toString())).flowable().subscribeOn(Schedulers.io()).subscribe(new Consumer<TransactionReceipt>() {
                         @Override
                         public void accept(TransactionReceipt transactionReceipt) throws Exception {
                             Log.i("vac", "accept: ");
