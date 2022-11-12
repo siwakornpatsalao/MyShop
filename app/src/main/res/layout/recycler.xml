@@ -19,7 +19,7 @@
         android:layout_height="38dp"
         android:layout_gravity="center"
         android:text="ProductName"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:textStyle="bold|italic" />
 
     <TextView
@@ -29,7 +29,7 @@
         android:layout_gravity="center"
 
         android:text="Price"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:textStyle="bold|italic" />
 
     <TextView
@@ -38,7 +38,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:text="Amount"
-        android:textSize="20sp"
+        android:textSize="24sp"
         android:textStyle="bold|italic" />
 
 </LinearLayout>

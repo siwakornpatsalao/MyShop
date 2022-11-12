@@ -1,5 +1,6 @@
 package com.example.amuletmarketplace;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -43,9 +44,9 @@ public class DetailActivity extends AppCompatActivity {
         setContentView(R.layout.product_detail);
 
         Web3j web3 = Web3j.build(new HttpService("https://goerli.infura.io/v3/53fa151696b14216ba7b13c493e3c1f3"));
-        Credentials credentials = Credentials.create("0xDF3782EeC35cf02C8C8e65000Bb2c79C954869C8");
+        Credentials credentials = Credentials.create("d0571789b6ea1136f1917c5022f8465523cf4feacd3aa29630b714568ddb4460");
         ContractGasProvider contractGasProvider = new DefaultGasProvider();
-        A a = A.load("0xdeFCbcb831ceDdb47A5bfc4ea047f1185fC64d02", web3, credentials, contractGasProvider);
+        A a = A.load("0x3aaB46EeD5c2c7252679dDC9c618a979f785EC4F", web3, credentials, contractGasProvider);
 
         ImageView imageProduct = findViewById(R.id.imageProductm);
         TextView productName = findViewById(R.id.viewProductName);
@@ -101,12 +102,24 @@ public class DetailActivity extends AppCompatActivity {
                     alert.setVisibility(View.VISIBLE);
                     amount.getText().clear();
                 }else{
-                    a.store(new BigInteger("123")).flowable().subscribeOn(Schedulers.io()).subscribe(new Consumer<TransactionReceipt>() {
+                    a.store(new BigInteger("400")).flowable().subscribeOn(Schedulers.io()).subscribe(new Consumer<TransactionReceipt>() {
                         @Override
                         public void accept(TransactionReceipt transactionReceipt) throws Exception {
                             Log.i("vac", "accept: ");
                         }
                     });
+
+                    /*
+                    a.retrieve().flowable().subscribeOn(Schedulers.io()).subscribe(new Consumer<BigInteger>() {
+                        @Override
+                        public void accept(BigInteger bigInteger) throws Exception {
+                            //TextView textView = findViewById(R.id.text22);
+                            //textView.setText(String.valueOf(bigInteger));
+                            Log.i("vac", "accept: " + bigInteger);
+                        }
+                    });
+
+                     */
                     String temp = amount.getText().toString();
                     int amount2 = Integer.parseInt(temp);
                     int newAmount = amountN - amount2;

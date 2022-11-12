@@ -2,6 +2,7 @@ package com.example.amuletmarketplace;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -15,7 +16,17 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.amuletmarketplace.Database.AppDatabase;
 import com.example.amuletmarketplace.Database.Product;
 
+import org.web3j.crypto.Credentials;
+import org.web3j.protocol.Web3j;
+import org.web3j.protocol.http.HttpService;
+import org.web3j.tx.gas.ContractGasProvider;
+import org.web3j.tx.gas.DefaultGasProvider;
+
+import java.math.BigInteger;
 import java.util.List;
+
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
 
 public class MarketplaceActivity extends AppCompatActivity {
     private ProductListAdapter productListAdapter;
@@ -24,6 +35,10 @@ public class MarketplaceActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        Web3j web3 = Web3j.build(new HttpService("https://goerli.infura.io/v3/53fa151696b14216ba7b13c493e3c1f3"));
+        Credentials credentials = Credentials.create("d0571789b6ea1136f1917c5022f8465523cf4feacd3aa29630b714568ddb4460");
+        ContractGasProvider contractGasProvider = new DefaultGasProvider();
+        A a = A.load("0x3aaB46EeD5c2c7252679dDC9c618a979f785EC4F", web3, credentials, contractGasProvider);
 
 
         Button addProduct = findViewById(R.id.addProduct);
