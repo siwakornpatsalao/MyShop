@@ -52,7 +52,7 @@ public class AddNewProductActivity extends AppCompatActivity {
         saveButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(productNameInput.getText().toString().isEmpty() || price.getText().toString().isEmpty() || description.getText().toString().isEmpty() || amount.getText().toString().isEmpty() || productImage==null) {
+                if(productNameInput.getText().toString().isEmpty() || price.getText().toString().isEmpty() || description.getText().toString().isEmpty() || amount.getText().toString().isEmpty() || productImage.getDrawable()==null) {
                     alert.setText("ข้อมูลไม่ครบ");
                     alert.setVisibility(View.VISIBLE);
                     productNameInput.getText().clear();

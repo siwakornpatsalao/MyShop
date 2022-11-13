@@ -110,18 +110,6 @@ public class DetailActivity extends AppCompatActivity {
                             Log.i("vac", "accept: ");
                         }
                     });
-
-                    /*
-                    a.retrieve().flowable().subscribeOn(Schedulers.io()).subscribe(new Consumer<BigInteger>() {
-                        @Override
-                        public void accept(BigInteger bigInteger) throws Exception {
-                            //TextView textView = findViewById(R.id.text22);
-                            //textView.setText(String.valueOf(bigInteger));
-                            Log.i("vac", "accept: " + bigInteger);
-                        }
-                    });
-
-                     */
                     String temp = amount.getText().toString();
                     int amount2 = Integer.parseInt(temp);
                     int newAmount = amountN - amount2;

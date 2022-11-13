@@ -2,81 +2,56 @@ package com.example.amuletmarketplace;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
+import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.TextView;
+import android.widget.ImageView;
+import android.widget.PopupMenu;
+import android.widget.Toast;
+import androidx.appcompat.widget.Toolbar;
 
 import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.DividerItemDecoration;
+import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.amuletmarketplace.Database.AppDatabase;
 import com.example.amuletmarketplace.Database.Product;
 
-import org.web3j.crypto.Credentials;
-import org.web3j.protocol.Web3j;
-import org.web3j.protocol.http.HttpService;
-import org.web3j.tx.gas.ContractGasProvider;
-import org.web3j.tx.gas.DefaultGasProvider;
-
-import java.math.BigInteger;
+import java.lang.reflect.Field;
+import java.lang.reflect.Method;
 import java.util.List;
 
-import io.reactivex.functions.Consumer;
-import io.reactivex.schedulers.Schedulers;
-
-public class MarketplaceActivity extends AppCompatActivity {
+public class MarketplaceActivity extends AppCompatActivity implements PopupMenu.OnMenuItemClickListener {
     private ProductListAdapter productListAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        /*
-        Web3j web3 = Web3j.build(new HttpService("https://goerli.infura.io/v3/53fa151696b14216ba7b13c493e3c1f3"));
-        Credentials credentials = Credentials.create("d0571789b6ea1136f1917c5022f8465523cf4feacd3aa29630b714568ddb4460");
-        ContractGasProvider contractGasProvider = new DefaultGasProvider();
-        A a = A.load("0x3aaB46EeD5c2c7252679dDC9c618a979f785EC4F", web3, credentials, contractGasProvider);
 
-         */
+        ImageView menu = findViewById(R.id.menu);
 
-
-        Button addProduct = findViewById(R.id.addProduct);
-        addProduct.setOnClickListener(new View.OnClickListener() {
+        menu.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                startActivityForResult(new Intent(MarketplaceActivity.this, AddNewProductActivity.class), 100);
+            public void onClick(View view) {
+                showPopup(view);
             }
         });
 
-        Button logout = findViewById(R.id.logoutButton);
-        logout.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivityForResult(new Intent(MarketplaceActivity.this, MainActivity.class), 100);
-            }
-        });
 
         initRecyclerView();
 
         loadProductList();
 
-        /*Button detail = findViewById(R.id.toDetailButton);
-        detail.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                startActivityForResult(new Intent(MarketplaceActivity.this, DetailActivity.class), 100);
-            }
-        });
-         */
     }
 
     private void initRecyclerView() {
         RecyclerView recyclerView = findViewById(R.id.recyclerView);
-        recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        //recyclerView.setLayoutManager(new LinearLayoutManager(this));
+        RecyclerView.LayoutManager mLayoutManager = new GridLayoutManager(this, 2);
+        recyclerView.setLayoutManager(mLayoutManager);
 
         DividerItemDecoration dividerItemDecoration = new DividerItemDecoration(this, DividerItemDecoration.VERTICAL);
         recyclerView.addItemDecoration(dividerItemDecoration);
@@ -84,10 +59,32 @@ public class MarketplaceActivity extends AppCompatActivity {
         recyclerView.setAdapter(productListAdapter);
     }
 
+
     private void loadProductList() {
         AppDatabase db = AppDatabase.getDbInstance(this.getApplicationContext());
         List<Product> productList =db.productDao().getAllProducts();
         productListAdapter.setProductList(productList);
+    }
+
+    public void showPopup(View v){
+        PopupMenu popup =new PopupMenu(this,v);
+        popup.setOnMenuItemClickListener(this);
+        popup.inflate(R.menu.popup_menu);
+        popup.show();
+    }
+
+    @Override
+    public boolean onMenuItemClick(MenuItem menuItem) {
+        switch (menuItem.getItemId()){
+            case R.id.addProduct:
+                startActivityForResult(new Intent(MarketplaceActivity.this, AddNewProductActivity.class), 100);
+                return true;
+            case R.id.logout:
+                startActivityForResult(new Intent(MarketplaceActivity.this, MainActivity.class), 100);
+                return true;
+            default:
+                return false;
+        }
     }
 
     @Override

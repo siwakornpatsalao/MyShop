@@ -42,30 +42,6 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.login);
 
-        /*
-        Web3j web3 = Web3j.build(new HttpService("https://goerli.infura.io/v3/53fa151696b14216ba7b13c493e3c1f3"));
-        Credentials credentials = Credentials.create("0xDF3782EeC35cf02C8C8e65000Bb2c79C954869C8");
-        ContractGasProvider contractGasProvider = new DefaultGasProvider();
-        A a = A.load("0xdeFCbcb831ceDdb47A5bfc4ea047f1185fC64d02", web3, credentials, contractGasProvider);
-        //onclick
-        a.retrieve().flowable().subscribeOn(Schedulers.io()).subscribe(new Consumer<BigInteger>() {
-            @Override
-            public void accept(BigInteger bigInteger) throws Exception {
-                Log.i("vac", "accept: " + bigInteger);
-            }
-        });
-        //เก็บค่าใน
-        a.store(new BigInteger("123")).flowable().subscribeOn(Schedulers.io()).subscribe(new Consumer<TransactionReceipt>() {
-            @Override
-            public void accept(TransactionReceipt transactionReceipt) throws Exception {
-                Log.i("vac", "accept: ");
-            }
-        });
-
-         */
-
-
-
         AppDatabase db  = AppDatabase.getDbInstance(this.getApplicationContext());
         db.userDao().getAllUsers();
         db.productDao().getAllProducts();

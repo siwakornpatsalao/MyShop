@@ -44,10 +44,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
     @Override
     public void onBindViewHolder(@NonNull ProductListAdapter.MyViewHolder holder, int position) {
         Product product = productList.get(position);
-        //holder.image.load(this.productList.get(position).image);
-        //ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        //bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-        //image = baos.toByteArray();
 
         Bitmap bitmap = BitmapFactory.decodeByteArray(this.productList.get(position).image , 0, this.productList.get(position).image.length);
         holder.image.setImageBitmap(bitmap);
@@ -57,13 +53,6 @@ public class ProductListAdapter extends RecyclerView.Adapter<ProductListAdapter.
         //holder.tvLastName.setText(this.userList.get(position).lastName);
 
         byte[] image2 = this.productList.get(position).image;
-        //Bitmap bitmap2 = BitmapFactory.decodeByteArray(this.productList.get(position).image , 0, this.productList.get(position).image.length);
-        //ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-        //bitmap2.compress(Bitmap.CompressFormat.PNG,100, bytes);
-        //byte[] b = bytes.toByteArray();
-        //String image2 = Base64.encodeToString(b, Base64.DEFAULT);
-
-        //String image2 = String.valueOf(productList.get(position).image);
         String productName2 = product.productName;
         int price2 = product.price;
         int amount2 = product.amount;
