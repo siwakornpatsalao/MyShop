@@ -43,11 +43,10 @@ public class DetailActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.product_detail);
 
-        Web3j web3 = Web3j.build(new HttpService("https://goerli.infura.io/v3/53fa151696b14216ba7b13c493e3c1f3"));
+        Web3j web3 = Web3j.build(new HttpService("https://goerli.infura.io/v3/35b272870402436792e0d7034c0a0a54"));
         Credentials credentials = Credentials.create("d0571789b6ea1136f1917c5022f8465523cf4feacd3aa29630b714568ddb4460");
         ContractGasProvider contractGasProvider = new DefaultGasProvider();
-        //A a = A.load("0x3aaB46EeD5c2c7252679dDC9c618a979f785EC4F", web3, credentials, contractGasProvider);
-        C c = C.load("0xDcf5fBA78279B5f7A55c12e18D7eDb17a2dC751f",web3,credentials,contractGasProvider);
+        E x = E.load("0x154892257e2AA821f793C9aD58CD9556244490b3",web3,credentials,contractGasProvider);
 
 
         ImageView imageProduct = findViewById(R.id.imageProductm);
@@ -104,21 +103,22 @@ public class DetailActivity extends AppCompatActivity {
                     alert.setVisibility(View.VISIBLE);
                     amount.getText().clear();
                 }else{
-                    c.store(new BigInteger(amount.getText().toString()), new BigInteger(productPrice.getText().toString())).flowable().subscribeOn(Schedulers.io()).subscribe(new Consumer<TransactionReceipt>() {
+                    alert.setText("กำลังเชื่อมต่อกับ Smart Contract");
+                    alert.setVisibility(View.VISIBLE);
+                    x.store(new BigInteger(amount.getText().toString()), new BigInteger(productPrice.getText().toString())).flowable().subscribeOn(Schedulers.io()).subscribe(new Consumer<TransactionReceipt>() {
                         @Override
                         public void accept(TransactionReceipt transactionReceipt) throws Exception {
+                            String temp = amount.getText().toString();
+                            int amount2 = Integer.parseInt(temp);
+                            int newAmount = amountN - amount2;
+                            assert product != null;
+                            product.setAmount(newAmount);
+                            System.out.println(product.getAmount());
+                            database.productDao().update(product);
+                            startActivityForResult(new Intent(DetailActivity.this, MarketplaceActivity.class), 100);
                             Log.i("vac", "accept: ");
                         }
                     });
-                    String temp = amount.getText().toString();
-                    int amount2 = Integer.parseInt(temp);
-                    int newAmount = amountN - amount2;
-                    //int sum = amount2*priceN;
-                    assert product != null;
-                    product.setAmount(newAmount);
-                    System.out.println(product.getAmount());
-                    database.productDao().update(product);
-                    startActivityForResult(new Intent(DetailActivity.this, MarketplaceActivity.class), 100);
                 }
             }
         });
